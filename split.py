@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python
 import os
 import sys
 import glob
@@ -31,7 +31,7 @@ errorbc = []
 for line in tagfile.xreadlines():
   line = line.rstrip().rsplit("\t")
   taghash[line[0]] = int(filter(str.isdigit,line[1]+line[2]+line[3]))
-  if int(line[4]) == 1: errorbc.append(line[4])
+  if len(line) == 5: errorbc.append(line[0])
 R1outfiles = {}
 R2outfiles = {}
 for tag in taghash.keys():
