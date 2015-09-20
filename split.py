@@ -42,8 +42,8 @@ for tag in taghash.keys():
     R1outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R1_bc.fq','w')
     R2outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R2_bc.fq','w')
   else:
-    R1outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R1_bc.','w')
-    R2outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R2_bc.','w')
+    R1outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R1.fq','w')
+    R2outfiles[tag] = open('../split/G'+str(group)+'P'+str(patient)+'T'+str(time)+'_R2.fq','w')
 countfile = 0
 for R1file in filenames:
   countfile += 1
