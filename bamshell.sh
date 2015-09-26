@@ -8,5 +8,4 @@ samtools view -bt $REF_FILE -o ../bams/$TARGET.bam ../bams/$TARGET.sam
 samtools sort -T ../tmp/$TARGET.sorted -o ../bams/$TARGET.sorted.bam ../bams/$TARGET.bam
 samtools index ../bams/$TARGET.sorted.bam
 samtools idxstats ../bams/$TARGET.sorted.bam > ../logs/$TARGET.log
-samtools mpileup -uf $REF_FILE ../bams/$TARGET.sorted.bam > ../bams/$TARGET.sorted.bcf
-bcftools view ../bams/$TARGET.sorted.bcf > ../bams/$TARGET.raw.bcf 
+samtools mpileup -d 10000 -f ../ref/ref.fa  -L 10000 -vuDV -o G1P1T1_R1.raw.vcf G1P1T1_R1.sorted.bam
