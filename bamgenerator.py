@@ -4,10 +4,10 @@ import sys
 import glob
 import string
 
-pathdata = '/media/Yushen/split/'
-pathbam  = '/media/Yushen/bams/'
+pathdata = '../split/'
+pathbam  = '../bams/'
 pathtmp  = '../tmp/'
-refseq   = '../ref.fa'
+refseq   = '../ref/ref.fa'
 fqfiles  = sorted(glob.glob(pathdata+'*_R1.fq'))
 for fqfile1 in fqfiles:
   fqfile2  = fqfile1.replace('_R1','_R2')
@@ -17,11 +17,11 @@ for fqfile1 in fqfiles:
     os.system("split -l 15000000 "+fqfile2+" "+fqfile+"_R2")
     os.system("rm "+fqfile1)
     os.system("rm "+fqfile2)
-fqfiles  = sorted(glob.glob(pathdata+'*.fq')
+fqfiles  = sorted(glob.glob(pathdata+'*.fq'))
 for fqfile in fqfiles:
   newname = fqfile.rsplit('.fq')[0]+'aa'
   os.system("mv "+fqfile+" "+newname)
-fqfiles  = sorted(glob.glob(pathdata+"*_R1a")
+fqfiles  = sorted(glob.glob(pathdata+"*_R1a*"))
 for fqfile1 in fqfiles:
   fqfile2  = fqfile1.replace('R1','R2')
   saifile1 = pathbam+fqfile1.rsplit(pathdata)[1]+'.sai'
@@ -37,5 +37,5 @@ for fqfile1 in fqfiles:
   os.system("rm "+saifile1)
   os.system("rm "+saifile2)
   os.system("samtools view -bS "+samfile+" > "+bamfile)
-  os.system("samtools sort -T "+tmpfile+" "+bamfile+" > "+sortbam)
+  os.system("samtools sort -T "+tmpfile+" -O bam "+bamfile+" > "+sortbam)
 
