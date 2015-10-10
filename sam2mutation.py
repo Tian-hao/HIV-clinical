@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #sam to mutation count
 #sam to mutation frequency
-#and sam to consensus
+#sam to consensus
+#try this: for FILE in *T1; do bwa mem ../ref/ref.fa $FILE > $FILE.sam; done
 from __future__ import division
 import os
 import re
