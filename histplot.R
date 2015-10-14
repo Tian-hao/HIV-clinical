@@ -1,4 +1,5 @@
 #R code
+#pilot run to visualize data
 
 a <- read.table("../freq/G1P1T1.freq",header=T)
 png("../plot/hist1.png")

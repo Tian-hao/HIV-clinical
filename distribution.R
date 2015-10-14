@@ -1,5 +1,6 @@
 #R code
 #distribution of four kinds of mutations' frequency
+#I abadoned it because it is difficult to visualize
 for (g in 1:2){
   for (p in 1:5){
     if (p==4) next

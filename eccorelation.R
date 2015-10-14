@@ -1,4 +1,5 @@
 #Rcode
+#correlation before and after error correction
 
 ec1 <- read.table("ecresult/G2P1T1.count",header=F)
 ec5 <- read.table("ecresult/G2P5T1.count",header=F)

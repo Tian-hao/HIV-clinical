@@ -1,5 +1,5 @@
 #R code
-
+#coverage of every sample
 for (g in 1:2){
   for (p in 1:5){
     for (t in 1:2){
