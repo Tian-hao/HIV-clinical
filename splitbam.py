@@ -8,13 +8,14 @@ import glob
 import string
 import pysam
 
-path2infile = '../bams/'
-path2outfile = '../bams/'
+path2infile = '/Volumes/Yushen/sorted/'
+path2outfile = '/Volumes/Yushen/sorted/split/'
+path2tmp = '../tmp/'
 NUM = 5
 infiles = sorted(glob.glob(path2infile+'*1P1T1_aasorted.bam'))
 for infile in infiles:
   print 'working on '+infile
-  os.system('samtools index '+path2infile+infile)
+  os.system('samtools index '+infile)
   inbam = pysam.AlignmentFile(infile,'rb')
   header = inbam.header
   outfile = {}
@@ -22,7 +23,7 @@ for infile in infiles:
   newname = {}
   for i in range(1,NUM+1):
     newname[i] = infile.rsplit(path2infile)[1].rsplit('sorted.bam')[0]+'ss'+str(i)+'sorted.sam'
-    outfile[i] = path2outfile+newname[i]
+    outfile[i] = path2tmp+newname[i]
     outbam[i] = pysam.AlignmentFile(outfile[i],'wh',header=header)
   handle = inbam.fetch("Gag_pol")
   readcount = 0
@@ -35,7 +36,8 @@ for infile in infiles:
   inbam.close()
   for i in range(1,NUM+1):
     outbam[i].close()
-    os.system('samtools view -bS '+path2outfile+newname[i]+' > '+path2outfile+newname[i]+'.bam')
-    os.system('rm '+path2outfile+newname[i])
+    os.system('samtools view -bSF4 '+path2tmp+newname[i]+' | samtools sort -T '+path2tmp+' -O bam > '+path2outfile+newname[i]+'.bam')
+    os.system('rm '+path2tmp+newname[i])
+    os.system('samtools index '+path2outfile+newname[i]+'.bam')
     
 
