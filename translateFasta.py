@@ -2,6 +2,7 @@
 import os
 import sys
 import string
+import glob
 from Bio import SeqIO
 from Bio.Seq import Seq
 
@@ -24,6 +25,7 @@ def translation(seq):
     "GGT":"G", "GGC":"G", "GGA":"G", "GGG":"G", "XXX":"X"}
   pep = []
   i = 0
+  seq = str(seq).translate(None,"-")
   while i < len(seq):
     codon = seq[i:i+3]
     if 'N' in codon:
@@ -32,15 +34,20 @@ def translation(seq):
       aa = 'X'
     else:
       aa = dnamap[codon]
+    if aa == '_':
+      break
     pep.append(aa)
     i = i + 3
   pep = ''.join(pep)
   return pep
 
-infile = open('../freq/consensus0.fa','r')
-outfile = open('../cns/protein.fa','w')
-outlist = []
-for record in SeqIO.parse(infile,"fasta"):
-  record.seq = Seq(translation(record.seq[26:-1]))
-  outlist.append(record)
-SeqIO.write(outlist,outfile,'fasta')
+infiles = sorted(glob.glob('../haploPredict/pilot2/*.fas'))
+for infile in infiles:
+  outfile = infile.rsplit('.fas')[0]+'.pep'
+  outlist = []
+  inhandle = open(infile,'r')
+  outhandle = open(outfile,'w')
+  for record in SeqIO.parse(inhandle,"fasta"):
+    record.seq = Seq(translation(record.seq))
+    outlist.append(record)
+  SeqIO.write(outlist,outhandle,'fasta')
