@@ -5,12 +5,13 @@ import string
 from Levenshtein import *
 from Bio import SeqIO
 
-nucfile = open('all.fasta','r')
+filename = sys.argv[1]
+nucfile = open(filename,'r')
 nucdis = open('nuc.ham','w')
 record = {}
 for read in SeqIO.parse(nucfile,'fasta'):
   record[str(read.id)] = str(read.seq)
-for seqA in record.keys():
-  for seqB in record.keys():
-    nucdis.write(seqA+'\t'+seqB+'\t'+str(hamming(record[seqA],record[seqB]))+'\n')
+for seqA in sorted(record.keys()):
+  for seqB in sorted(record.keys()):
+    nucdis.write(seqA+'\t'+seqB+'\t'+str(distance(record[seqA],record[seqB]))+'\n')
   

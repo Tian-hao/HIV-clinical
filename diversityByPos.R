@@ -24,9 +24,9 @@ for (g in 1:2){
 	  count[,i] <- count[,i]+tmp[,i]
 	}
       }
-      SWmatrix <- diversity(count[,2:5])
+      SWmatrix <- diversity(count[,2:5])/log(sum(count[,2:5]))
       if (t==1){
-        plot(count[,1],SWmatrix,xlim=c(0,1520),ylim=c(10e-3,1),xlab='position',ylab='SW Index',
+        plot(count[,1],SWmatrix,xlim=c(0,1520),ylim=c(10e-4,0.1),xlab='position',ylab='SW Index',
           main=shortname,col=2,log='y')
       }
       if (t==2){

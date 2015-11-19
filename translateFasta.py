@@ -29,9 +29,9 @@ def translation(seq):
   while i < len(seq):
     codon = seq[i:i+3]
     if 'N' in codon:
-      aa = 'X'
+      aa = ''
     elif len(codon) != 3:
-      aa = 'X'
+      aa = ''
     else:
       aa = dnamap[codon]
     if aa == '_':
