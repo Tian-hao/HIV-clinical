@@ -41,10 +41,10 @@ def translation(seq):
 
 def readbam(bamfile,qs):
   aafreq = {}
-  for i in range(0,500):
+  for i in range(0,530):
     aafreq[i] = {}
   for line in bamfile:
-    if min(line.query_qualities) < 30:
+    if min(line.query_qualities) < qs:
       continue
     if line.reference_start < 24:
       continue
@@ -75,7 +75,7 @@ def writefreq(outfile,aafreq):
         freqfile.write('\t0')
     freqfile.write('\n')
 
-QualityScore = 30
+QualityScore = 20
 path2sam = '../bams/'
 path2out = '../bams/'
 samfiles = sorted(glob.glob(path2sam+'G*aa.sam'))

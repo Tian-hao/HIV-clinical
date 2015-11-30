@@ -1,6 +1,6 @@
 #R code
-png('../graph/lethal.png',res=200,width=1800,height=1200)
-par(mfrow=c(4,4))
+png('../graph/lethal.png',res=400,width=3600,height=3600)
+par(mfrow=c(4,4),cex=0.2)
 for (g in 1:2){
   for (p in 1:5){
     if (p==4) next
@@ -14,7 +14,12 @@ for (g in 1:2){
       #}
       for (filename in patientfiles){
         tmp <- read.table(paste('../bams/',filename,sep=''),header=T)
-	plot(tmp[,23],main=fullname)
+	plot(tmp[,23],type='n',ylim=c(0,1),main=fullname)
+	for (i in 1:500){
+	  total <- sum(tmp[i,2:23])
+ 	  if (total > 0 & tmp[i,23]>0) points(tmp[i,1],tmp[i,23]/total)
+	  else points(tmp[i,1],1e-4)
+	}
       }
     }
   }
