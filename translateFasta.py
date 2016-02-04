@@ -34,8 +34,8 @@ def translation(seq):
       aa = ''
     else:
       aa = dnamap[codon]
-    if aa == '_':
-      break
+    #if aa == '_':
+      #break
     pep.append(aa)
     i = i + 3
   pep = ''.join(pep)

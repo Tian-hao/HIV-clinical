@@ -60,7 +60,7 @@ def readbam(bamfile,qs):
 
 def writefreq(outfile,aafreq):
   AA = ['A','C','D','E','F','G','H','I','K','L','M','N','P','Q',
-    'L','M','N','V','W','Y','X','_']
+    'R','S','T','V','W','Y','X','_']
   freqfile = open(outfile,'w')
   freqfile.write('pos')
   for aa in AA:

@@ -52,8 +52,8 @@ def readbam(bamfile,reflist,qs):
     i = 0
     while i < len(pepseq)-3:
       if  pepseq[i:i+3] == 'TGA': aafreq[i/3+transtart_pep]['TGA'] += 1
-      if  pepseq[i:i+3] == 'TAG': aafreq[i/3+transtart_pep]['TAG'] += 1
-      if  pepseq[i:i+3] == 'TAA': aafreq[i/3+transtart_pep]['TAA'] += 1
+      elif  pepseq[i:i+3] == 'TAG': aafreq[i/3+transtart_pep]['TAG'] += 1
+      elif  pepseq[i:i+3] == 'TAA': aafreq[i/3+transtart_pep]['TAA'] += 1
       else: aafreq[i/3+transtart_pep]['XXX'] += 1
       if  reflist[i/3+transtart_pep] == 'TGG': aafreq[i/3+transtart_pep]['TGG'] += 1
       i += 3
@@ -75,7 +75,7 @@ def writefreq(outfile,aafreq):
 
 qs = 20
 cnsfile = open('../freq/pilot/G1P2T2.cns')
-refseq = readcns(cnsfile)
+refseqs = readcns(cnsfile)
 reflist = getlist(refseq)
 cnsfile.close()
 bamfile = pysam.AlignmentFile('../bams/G1P2T2_aa.bam','rb')
